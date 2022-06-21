@@ -28,6 +28,14 @@
         <servlet-name>DetailController</servlet-name>
         <servlet-class>servlet.DetailController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CreateNewBill</servlet-name>
+        <servlet-class>servlet.CreateNewBill</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateBill</servlet-name>
+        <servlet-class>servlet.CreateBill</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -55,6 +63,14 @@
     <servlet-mapping>
         <servlet-name>DetailController</servlet-name>
         <url-pattern>/DetailController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateNewBill</servlet-name>
+        <url-pattern>/CreateNewBill</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateBill</servlet-name>
+        <url-pattern>/CreateBill</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

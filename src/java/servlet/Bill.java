@@ -6,12 +6,10 @@
 package servlet;
 
 import dao.BillDAO;
+import dao.GeneralDAO;
 import dao.ItemDAO;
-import dao.PawnShopDAO;
-import dao.StaffDAO;
 import dto.BillDTO;
-import dto.PawnShopDTO;
-import dto.StaffDTO;
+import dto.General;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -46,28 +44,24 @@ public class Bill extends HttpServlet {
         try {
             BillDAO daoBill = new BillDAO();
             ItemDAO daoItem = new ItemDAO();
-            StaffDAO daoStaff = new StaffDAO();
-            PawnShopDAO daoShop = new PawnShopDAO();
-            HttpSession session = request.getSession();
-            String staffID = request.getParameter("userID");
-            StaffDTO s= daoStaff.viewStaff(staffID);
-            PawnShopDTO shop = daoShop.viewPawnShop(s.getStoreID());
-            ArrayList<StaffDTO> listStaff = daoStaff.getAllStaff(shop.getStoreID());
-            if (!listStaff.isEmpty()) {
-                ArrayList<BillDTO> listBill = new ArrayList<>();
-                for (StaffDTO staff : listStaff) {
-                    ArrayList<BillDTO> tem = daoBill.getAllBill(staff.getStaffID());
-                    if (tem != null) {
-                        for (BillDTO bill : tem) {
-                            listBill.add(bill);
-                        }
-                    }
-                }
-                session.setAttribute("bill", listBill);
+            ArrayList<BillDTO> bil = daoBill.getAllBill();
+            System.out.println("size: "+bil.size());
+            for(BillDTO b: bil){
+                System.out.println("billID: "+b.getBillID());
+                System.out.println("itemID: "+b.getItemID());
+                System.out.println("pawnMoney: "+b.getPawnMoney());
+                System.out.println("numberDays: "+b.getNumberDays());
+                System.out.println("interestRate: "+b.getInterestRate());
+                System.out.println("billBeginDate: "+b.getBillBeginDate());
+                System.out.println("staffID: "+b.getStaffID().getStaffID());
+                System.out.println("returnMoney: "+b.getReturnMoney());
+
             }
+            HttpSession session = request.getSession();
+            session.setAttribute("bill", bil);
+
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println(e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

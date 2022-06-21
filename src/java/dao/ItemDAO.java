@@ -25,7 +25,7 @@ public class ItemDAO {
     Connection con = null;
     PreparedStatement stm = null;
     ResultSet rs = null;
-    private final String VIEW = "SELECT * FROM tblItem WHERE itemID = ?";
+
 
     public ArrayList<ItemDTO> getAllItem() {
         ArrayList<ItemDTO> item = new ArrayList<ItemDTO>();
@@ -43,7 +43,7 @@ public class ItemDAO {
                     String itemName = rs.getString("itemName");
                     String itemPic = rs.getString("itemPic");
                     String customerID = rs.getString("customerID");
-                    String storeID = rs.getString("storeID");
+                    int storeID = rs.getInt("storeID");
                     Date itemSending = rs.getDate("itemSendingDate");
                     Date itemGetting = rs.getDate("itemGettingDate");
                     boolean statusID = rs.getBoolean("statusID");
@@ -63,18 +63,21 @@ public class ItemDAO {
         try {
             con = DBConnect.makeConnection();
             if (con != null) {
-                stm = con.prepareStatement(VIEW);
+                String sql = "select itemName, itemPic, customerID, storeID, itemSendingDate,itemGettingDate, statusID "
+                            +"from tblItem "
+                            +"where itemID = ?";
+                stm = con.prepareStatement(sql);
                 stm.setInt(1, id);
                 rs = stm.executeQuery();
                 if (rs.next()) {
-                    int itemID;
+
                     String itemName = rs.getString("itemName");
-                    String itemPic = null;
+                    String itemPic = rs.getString("itemPic");
                     String customerID = rs.getString("customerID");
-                    String storeID = null;
-                    Date itemSendingDate = null;
+                    int storeID = rs.getInt("storeID");
+                    Date itemSendingDate = rs.getDate("itemSendingDate");
                     Date itemGettingDate = rs.getDate("itemGettingDate");
-                    boolean statusID = true;
+                    boolean statusID = rs.getBoolean("statusID");
                     ItemDTO item = new ItemDTO(id, itemName, itemPic, customerID, storeID, itemSendingDate, itemGettingDate, statusID);
                     return item;
                 }
@@ -98,18 +101,20 @@ public class ItemDAO {
         try {
             con = DBConnect.makeConnection();
             if (con != null) {
-                stm = con.prepareStatement(VIEW);
+                String sql = "select itemName, itemPic, customerID, storeID, itemSendingDate,itemGettingDate, statusID "
+                            +"from tblItem "
+                            +"where itemID = ?";
+                stm = con.prepareStatement(sql);
                 stm.setInt(1, id);
                 rs = stm.executeQuery();
                 if (rs.next()) {
-                    int itemID;
                     String itemName = rs.getString("itemName");
-                    String itemPic = null;
+                    String itemPic = rs.getString("itemPic");
                     String customerID = rs.getString("customerID");
-                    String storeID = null;
-                    Date itemSendingDate = null;
+                    int storeID = rs.getInt("storeID");
+                    Date itemSendingDate = rs.getDate("itemSendingDate");
                     Date itemGettingDate = rs.getDate("itemGettingDate");
-                    boolean statusID = true;
+                    boolean statusID = rs.getBoolean("statusID");
                     ItemDTO item = new ItemDTO(id, itemName, itemPic, customerID, storeID, itemSendingDate, itemGettingDate, statusID);
                     list.add(item);
                 }

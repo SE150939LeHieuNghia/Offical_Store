@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @author Admin
  */
 public class PawnShopDTO implements Serializable{
-    private int storeID;
+    private String storeID;
     private String storeName;
     private String storeAddress;
     private int phoneNumber;
@@ -22,7 +22,7 @@ public class PawnShopDTO implements Serializable{
     public PawnShopDTO() {
     }
 
-    public PawnShopDTO(int storeID, String storeName, String storeAddress, int phoneNumber, String managerID, String comfirmKey) {
+    public PawnShopDTO(String storeID, String storeName, String storeAddress, int phoneNumber, String managerID, String comfirmKey) {
         this.storeID = storeID;
         this.storeName = storeName;
         this.storeAddress = storeAddress;
@@ -31,11 +31,11 @@ public class PawnShopDTO implements Serializable{
         this.comfirmKey = comfirmKey;
     }
 
-    public int getStoreID() {
+    public String getStoreID() {
         return storeID;
     }
 
-    public void setStoreID(int storeID) {
+    public void setStoreID(String storeID) {
         this.storeID = storeID;
     }
 

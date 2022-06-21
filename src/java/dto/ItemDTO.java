@@ -13,12 +13,12 @@ import java.sql.Date;
  *
  * @author Admin
  */
-public class ItemDTO extends CustomerDTO implements Serializable{
+public class ItemDTO  implements Serializable{
     private int itemID;
     private String itemName;
     private String itemPic;
     private String customerID;
-    private String storeID;
+    private int storeID;
     private Date itemSendingDate;
     private Date itemGettingDate;
     private boolean statusID;
@@ -26,7 +26,7 @@ public class ItemDTO extends CustomerDTO implements Serializable{
     public ItemDTO() {
     }
 
-    public ItemDTO(int itemID, String itemName, String itemPic, String customerID, String storeID, Date itemSendingDate, Date itemGettingDate, boolean statusID) {
+    public ItemDTO(int itemID, String itemName, String itemPic, String customerID, int storeID, Date itemSendingDate, Date itemGettingDate, boolean statusID) {
         this.itemID = itemID;
         this.itemName = itemName;
         this.itemPic = itemPic;
@@ -69,11 +69,11 @@ public class ItemDTO extends CustomerDTO implements Serializable{
         this.customerID = customerID;
     }
 
-    public String getStoreID() {
+    public int getStoreID() {
         return storeID;
     }
 
-    public void setStoreID(String storeID) {
+    public void setStoreID(int storeID) {
         this.storeID = storeID;
     }
 

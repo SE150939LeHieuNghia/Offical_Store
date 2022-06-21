@@ -15,13 +15,13 @@ public class StaffDTO implements Serializable{
     private String staffID;
     private String fullName;
     private String password;
-    private int storeID;
+    private String storeID;
     
     public StaffDTO(){
         
     }
 
-    public StaffDTO(String staffID, String fullName, String password, int storeID) {
+    public StaffDTO(String staffID, String fullName, String password, String storeID) {
         this.staffID = staffID;
         this.fullName = fullName;
         this.password = password;
@@ -52,11 +52,11 @@ public class StaffDTO implements Serializable{
         this.password = password;
     }
 
-    public int getStoreID() {
+    public String getStoreID() {
         return storeID;
     }
 
-    public void setStoreID(int storeID) {
+    public void setStoreID(String storeID) {
         this.storeID = storeID;
     }
 

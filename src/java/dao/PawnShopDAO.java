@@ -11,7 +11,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import utils.DBConnect;
 
 /**
@@ -23,21 +22,21 @@ public class PawnShopDAO {
     PreparedStatement stm = null;
     ResultSet rs = null;
     private final String VIEW = "SELECT * FROM tblPawnShop WHERE storeID = ?";
-    public final String CREATE = "INSERT INTO tblPawnShop (storeName,storeAddress,phoneNumber,managerID,confirmKey) values (?, ?, ?, ?, ?, ?);";
+    public final String CREATE = "INSERT INTO tblPawnShop (storeID,storeName,storeAddress,phoneNumber,managerID,confirmKey) values (?, ?, ?, ?, ?, ?);";
     private final String UPDATE = "UPDATE tblPawnShop set storeName = ?, storeAddress = ?, phoneNumber = ?, managerID = ?  WHERE storeID = ?;";
     private final String DELETE = "DELETE FROM tblPawnShop WHERE storeID = ? ";
-    private final String GET_LIST_SHOP = "SELECT * FROM tblPawnShop";
-    private final String GET_ID = "SELECT storeID from tblPawnShop WHERE confirmKey = ?";
-    public boolean createPawnShop(String storeName, String storeAddress, int phoneNumber, String managerID, String confirmKey) throws SQLException, ClassNotFoundException {
+
+    public boolean createPawnShop(String storeID, String storeName, String storeAddress, int phoneNumber, String managerID, String confirmKey) throws SQLException, ClassNotFoundException {
         try {
             con = DBConnect.makeConnection();
             if (con != null) {
                 stm = con.prepareStatement(CREATE);
-                stm.setString(1, storeName);
-                stm.setString(2, storeAddress);
-                stm.setInt(3, phoneNumber);
-                stm.setString(4, managerID);
-                stm.setString(5, confirmKey);
+                stm.setString(1, storeID);
+                stm.setString(2, storeName);
+                stm.setString(3, storeAddress);
+                stm.setInt(4, phoneNumber);
+                stm.setString(5, managerID);
+                stm.setString(6, confirmKey);
                 if (stm.executeUpdate() > 0) {
                     return true;
                 }
@@ -53,17 +52,17 @@ public class PawnShopDAO {
         return false;
     }
 
-    public PawnShopDTO viewPawnShop(int id) throws SQLException, ClassNotFoundException {
+    public PawnShopDTO viewPawnShop(String id) throws SQLException, ClassNotFoundException {
         try {
             con = DBConnect.makeConnection();
             if (con != null) {
                 stm = con.prepareStatement(VIEW);
-                stm.setInt(1, id);
+                stm.setString(1, id);
                 rs = stm.executeQuery();
                 if (rs.next()) {
                     String storeName=rs.getString("storeName");
                     String storeAddress=rs.getString("storeAddress");
-                    int phoneNumber=rs.getInt("phoneNumber");
+                    int phoneNumber=rs.getInt("storeAddress");
                     String managerID=rs.getString("managerID");
                     String confirmKey=rs.getString("confirmKey");
                     PawnShopDTO shop = new PawnShopDTO(id, storeName, storeAddress, phoneNumber, managerID, confirmKey);
@@ -84,7 +83,7 @@ public class PawnShopDAO {
         return null;
     }
 
-    public boolean updatePawnShop(int storeID, String storeName, String storeAddress, int phoneNumber, String managerID) throws SQLException, ClassNotFoundException {
+    public boolean updatePawnShop(String storeID, String storeName, String storeAddress, int phoneNumber, String managerID) throws SQLException, ClassNotFoundException {
         try {
             con = DBConnect.makeConnection();
             if (con != null) {
@@ -93,7 +92,7 @@ public class PawnShopDAO {
                 stm.setString(2, storeAddress);
                 stm.setInt(3, phoneNumber);
                 stm.setString(4, managerID);
-                stm.setInt(5, storeID);
+                stm.setString(5, storeID);
                 if (stm.executeUpdate() > 0) {
                     return true;
                 }
@@ -109,7 +108,7 @@ public class PawnShopDAO {
         return false;
     }
 
-    public boolean deleteShop(String id) throws SQLException, ClassNotFoundException {
+    public boolean deleteStaff(String id) throws SQLException, ClassNotFoundException {
         try {
             con = DBConnect.makeConnection();
             if (con != null) {
@@ -130,49 +129,5 @@ public class PawnShopDAO {
         return false;
     }
     
-    public int getPawnShopIDByKey(String key) throws SQLException{
-        try{
-            con=DBConnect.makeConnection();
-            if(con!=null){
-                stm=con.prepareStatement(GET_ID);
-                stm.setString(1, key);
-                rs=stm.executeQuery();
-                if(rs.next()){
-                    return rs.getInt("storeID");
-                }
-            }
-        }finally{
-         if(rs!=null) rs.close();
-         if(stm!=null) stm.close();
-         if(con!=null) con.close();
-        }
-        return -1;
-    }
     
-    public ArrayList<PawnShopDTO> getListShop() throws SQLException{
-        try{
-            con=DBConnect.makeConnection();
-            if(con!=null){
-                ArrayList<PawnShopDTO> list=new ArrayList<>();
-                stm=con.prepareStatement(GET_LIST_SHOP);
-                rs=stm.executeQuery();
-                while(rs.next()){
-                    int storeID =rs.getInt("storeID");
-                    String storeName=rs.getString("storeName");
-                    String storeAddress=rs.getString("storeAddress");
-                    int phoneNumber=rs.getInt("storeAddress");
-                    String managerID=rs.getString("managerID");
-                    String confirmKey=rs.getString("confirmKey");
-                    PawnShopDTO shop = new PawnShopDTO(storeID, storeName, storeAddress, phoneNumber, managerID, confirmKey);
-                    list.add(shop);
-                }
-                if(!list.isEmpty()) return list;
-            }
-        }finally{
-         if(rs!=null) rs.close();
-         if(stm!=null) stm.close();
-         if(con!=null) con.close();
-        }
-        return null;
-    }
 }

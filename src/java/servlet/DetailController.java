@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -49,9 +50,9 @@ public class DetailController extends HttpServlet {
 //                System.out.println("ok");
 //                System.out.println(idd);
                 BillDAO bdao = new BillDAO();
-                
+                HttpSession session = request.getSession();
                 ArrayList<BillDTO> bdto = bdao.getBillByIdItem(idd);
-                request.setAttribute("itemID", idd);
+                session.setAttribute("itemID", idd);
                 
                 
 //                System.out.println(bdto.get(0).getBillID());
@@ -62,7 +63,7 @@ public class DetailController extends HttpServlet {
         }catch(Exception e){
             e.printStackTrace();
         }
-        request.getRequestDispatcher("details.jsp").forward(request, response);
+        request.getRequestDispatcher("detailsbill.jsp").forward(request, response);
         
     }
 

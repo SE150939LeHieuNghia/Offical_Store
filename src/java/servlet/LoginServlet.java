@@ -65,7 +65,7 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         String userID = request.getParameter("userID");
         String password = request.getParameter("password");
-        String url="login.jsp";
+
         try {
             StaffDAO dao = new StaffDAO();
             AdminDAO daoAdmin=new AdminDAO();
@@ -74,13 +74,15 @@ public class LoginServlet extends HttpServlet {
                 if (staff != null) {
                     HttpSession session = request.getSession();
                     session.setAttribute("STAFF", staff);
-                     url="Bill?userID = "+userID;
+                    response.sendRedirect("Bill");
                 }
+            }else if(daoAdmin.checkLogin(userID, password)){
+                
+            }else{
+                response.sendRedirect("LoginServlet");
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }finally{
-            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

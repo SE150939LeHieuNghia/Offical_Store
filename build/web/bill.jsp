@@ -139,45 +139,44 @@
                                         <a herf="customer-update.html"><input id="create_customer" type="submit" name="action" value="Thêm hóa đơn"/></a>
                                     </div>
                                     <div class="table-responsive">
-                                       
-                                            <%
-                                                ArrayList<BillDTO> bill = (ArrayList<BillDTO>) session.getAttribute("bill");
-                                                ArrayList<BillDTO> bilas = (ArrayList<BillDTO>) request.getAttribute("truong");
-                                                String error = (String) request.getAttribute("message");
-                                                BillDAO daoBill = new BillDAO();
-                                                ItemDAO daoItem = new ItemDAO();
-                                                ArrayList<ItemDTO> itemdto = daoItem.getAllItem();
-                                                if (bill != null) {
 
-                                            %>
-                                            <table class="table table-striped table-bordered zero-configuration">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Họ Tên</th>
-                                                        <th>Tên đồ vật</th>
-                                                        <th>Ngày gửi</th>
-                                                        <th>Số ngày gửi</th>
-                                                        <th>Function</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <%for (BillDTO b : bill) {%>
-                                                    <tr>
-                                                        <td style="text-align: center;padding: 10px 5px;"><%= daoBill.getCustomerByItemID(b).getFullname()%></td>
-                                                        <td style="text-align: center;padding: 10px 5px;"><%= daoItem.viewItem(b.getItemID()).getItemName()%></td>
-                                                        <td style="text-align: center;padding: 10px 5px;"><%= b.getBillBeginDate() %></td>
-                                                        <td style="text-align: center;padding: 10px 5px;"><%= b.getNumberDays()%></td>
-                                                        <td style="text-align: center;padding: 10px 5px;"><button><a style="text-decoration: none;padding: 10px;" href="DetailController?action=detail&id=<%= b.getItemID() %>">Chi tiết</a></button></td>
-                                                    </tr>
-                                                     
-                                                    <%}%>
-                                                </tbody>
-                                            </table>
-                                                    
-                                            <% }                                           
-                                            %>
+                                        <%
+                                            ArrayList<BillDTO> bill = (ArrayList<BillDTO>) session.getAttribute("bill");
+                                            String error = (String) request.getAttribute("message");
+                                            BillDAO daoBill = new BillDAO();
+                                            ItemDAO daoItem = new ItemDAO();
+                                            ArrayList<ItemDTO> itemdto = daoItem.getAllItem();
+                                            if (bill != null) {
+
+                                        %>
+                                        <table class="table table-striped table-bordered zero-configuration">
+                                            <thead>
+                                                <tr>
+                                                    <th>Họ Tên</th>
+                                                    <th>Tên đồ vật</th>
+                                                    <th>Ngày gửi</th>
+                                                    <th>Số ngày gửi</th>
+                                                    <th>Function</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <%for (BillDTO b : bill) {%>
                                             
-                                      
+                                                <tr>
+                                                    <td style="text-align: center;padding: 10px 5px;"><%= daoBill.getCustomerByItemID(b).getFullname()%></td>
+                                                    <td style="text-align: center;padding: 10px 5px;"><%= daoItem.viewItem(b.getItemID()).getItemName()%></td>
+                                                    <td style="text-align: center;padding: 10px 5px;"><%= b.getBillBeginDate()%></td>
+                                                    <td style="text-align: center;padding: 10px 5px;"><%= b.getNumberDays()%></td>
+                                                    <td style="text-align: center;padding: 10px 5px;"><button><a style="text-decoration: none;padding: 10px;" href="DetailController?action=detail&id=<%= b.getItemID()%>">Chi tiết</a></button></td>
+                                                </tr>
+                                            
+                                            <%}%>
+                                            </tbody>
+                                        </table>
+
+                                        <% }
+                                        %>
+
                                     </div>
                                 </div>
                             </div>

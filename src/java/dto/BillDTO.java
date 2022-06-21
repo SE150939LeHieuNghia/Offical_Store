@@ -19,13 +19,13 @@ public class BillDTO implements Serializable {
     private int numberDays;
     private float interestRate;
     private Date billBeginDate;
-    private String staffID;
+    private StaffDTO staffID;
     private int returnMoney;
 
     public BillDTO() {
     }
 
-    public BillDTO(int billID, int itemID, int pawnMoney, int numberDays, float interestRate, Date billBeginDate, String staffID, int returnMoney) {
+    public BillDTO(int billID, int itemID, int pawnMoney, int numberDays, float interestRate, Date billBeginDate, StaffDTO staffID, int returnMoney) {
         this.billID = billID;
         this.itemID = itemID;
         this.pawnMoney = pawnMoney;
@@ -84,11 +84,11 @@ public class BillDTO implements Serializable {
         this.billBeginDate = billBeginDate;
     }
 
-    public String getStaffID() {
+    public StaffDTO getStaffID() {
         return staffID;
     }
 
-    public void setStaffID(String staffID) {
+    public void setStaffID(StaffDTO staffID) {
         this.staffID = staffID;
     }
 

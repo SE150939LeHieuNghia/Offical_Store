@@ -71,14 +71,13 @@
                             <button type="submit" name="action" value="Login" class="login100-form-btn">Sign In</button>
                         </div>
 
-                        <span style="color:red"><%=(request.getAttribute("errMessage") == null) ? "" : request.getAttribute("errMessage")%></span> 
-                    </form>
+                        <span style="color:red"><%=(request.getAttribute("errMessage") == null) ? "" : request.getAttribute("errMessage")%></span>
                         <div class="w-full text-center p-t-55" >
                             <span class="txt2"> Not a member? </span>
                             <a href="register.jsp" class="txt2 bo1 ">Sign up now </a>
                         </div>
                         <div class="w-full text-center" style="margin-top: 20px;"><a href="ForgetPassword" class="txt2 bo1 m-l-5"> Forgot Password? </a></div>
-                   
+                    </form>
                 </div>
             </div>
         </div>
