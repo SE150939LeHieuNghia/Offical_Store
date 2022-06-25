@@ -132,4 +132,36 @@ public class ItemDAO {
         }
         return list;
     }
+//    public int updateItem(ItemDTO itemUpdate) throws SQLException, ClassNotFoundException {
+//        int result = 0;
+//        try {
+//            con = DBConnect.makeConnection();
+//            if (con != null) {
+//                String sql = "Update tblItem SET itemName = ?, itemPic = ?,"
+//                        + "itemSendingDate = ?, "
+//                        + "itemGettingDate = ?, "
+//                        + "statusID = ?, isKeep = ? WHERE itemID = ?";
+//                stm = con.prepareStatement(sql);
+//                stm.setString(1, itemUpdate.getItemName());
+//                stm.setString(2, itemUpdate.getItemPic());
+//                stm.setDate(3, itemUpdate.getItemSendingDate());
+//                stm.setDate(4, itemUpdate.getItemGettingDate());
+//                stm.setBoolean(5, itemUpdate.isStatusID());
+//                stm.setBoolean(6, itemUpdate.isKeep());
+//                stm.setInt(7, itemUpdate.getItemID());
+//                result = stm.executeUpdate();
+//            }
+//        } finally {
+//            if (rs != null) {
+//                rs.close();
+//            }
+//            if (stm != null) {
+//                stm.close();
+//            }
+//            if (con != null) {
+//                con.close();
+//            }
+//        }
+//        return result;
+//    }
 }

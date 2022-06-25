@@ -5,6 +5,7 @@
  */
 package servlet;
 
+import dao.BillDAO;
 import dto.BillDTO;
 import dto.StaffDTO;
 import java.io.IOException;
@@ -23,7 +24,8 @@ import javax.servlet.http.HttpSession;
  * @author Admin
  */
 public class CreateBill extends HttpServlet {
-
+    private final String CHECK_WRONG = "wrong.html";
+    private final String CHECK_CORRECT = "correct.html";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -37,9 +39,10 @@ public class CreateBill extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
+        String url = CHECK_WRONG;
         try {
-
-            int itemID = (int) session.getAttribute("item");
+            String item = request.getParameter("itemID");
+            int itemID = Integer.parseInt(item);
             
             String pawnMoneys = request.getParameter("txtPawnMoney");
             int pawnMoney = Integer.parseInt(pawnMoneys);
@@ -55,17 +58,21 @@ public class CreateBill extends HttpServlet {
             java.sql.Date sqlDate = java.sql.Date.valueOf(beginDate);
             
             StaffDTO staffID = (StaffDTO) session.getAttribute("STAFF");
-
+            
             String payMoney = request.getParameter("txtPayMoney");
             int returnMoney = Integer.parseInt(payMoney);
             
-            
-
-            
+            BillDAO bdao = new BillDAO();
+            boolean check = bdao.insertBill(itemID , pawnMoney, numberDays, interestRate, sqlDate, staffID , returnMoney);
+            System.out.println(check);
+            if(check){
+                url = CHECK_CORRECT;
+            }
+      
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-
+            response.sendRedirect(url);
         }
     }
 

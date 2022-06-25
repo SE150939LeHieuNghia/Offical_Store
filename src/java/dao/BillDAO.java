@@ -204,5 +204,28 @@ public class BillDAO {
         
         return check;
     }
-
+    
+    public boolean createCustomer(CustomerDTO cus) throws SQLException, ClassNotFoundException {
+        boolean check = false;
+        try {
+            con = DBConnect.makeConnection();
+            if (con != null) {
+                String sql = "INSERT INTO tblCustomer (customerID,fullname,phoneNumber,address,statusID) values (?, ?, ?, ?, 1)";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, cus.getCustomerID());
+                stm.setString(2, cus.getFullname());
+                stm.setInt(3, cus.getPhoneNumber());
+                stm.setString(4, cus.getAddress());
+                check = stm.executeUpdate() > 0 ? true : false;
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return check;
+    }
 }

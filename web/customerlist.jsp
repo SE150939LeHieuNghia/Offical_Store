@@ -4,13 +4,13 @@
     Author     : Admin
 --%>
 
-<%@page import="java.util.ArrayList"%>
-<%@page import="dto.CustomerDTO"%>
-<%@page import="dto.CustomerDTO"%>
 <%@page import="dao.CustomerDAO"%>
+<%@page import="dto.CustomerDTO"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -81,18 +81,18 @@
             <ul class="metismenu" id="menu">
                 <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
                     <!-- Avatar image in top left corner -->
-                    <img src="https://www.w3schools.com/w3images/avatar_smoke.jpg" style="width:100%">
+                    <img src="images/imagesSWP.jpg" style="width:100%">
 
-                    <a href="Bill" class="w3-bar-item w3-button w3-padding-large w3-black">
+                    <a href="Bill" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
                         <i class="fa fa-file w3-xxlarge"></i>
                         <p>Hóa đơn</p>
                     </a>
 
-                    <a href="customerlist.jsp" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+                    <a href="customerlist.jsp" class="w3-bar-item w3-button w3-padding-large w3-black">
                         <i class="fa fa-user w3-xxlarge"></i>
                         <p>Thông tin khách hàng</p>
                     </a>
-
+ư
 
                     <a href="#photos" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
                         <i class="fa fa-dollar w3-xxlarge"></i>
@@ -130,12 +130,11 @@
                                 <div class="card-body">
                                     <div id ="header_title_table">
                                         <h4 class="card-title">Thông tin khách hàng</h4>
-                                        <input id="create_customer" type="submit" name="action" onclick="location.href = 'bill-info-detail.jsp'" value="Thông tin khách hàng"/>
                                     </div>
                                     <div class="table-responsive">
                                         <%
                                             CustomerDAO dao = new CustomerDAO();
-                                            ArrayList<CustomerDTO> cusList = dao.getAllCus();
+                                            List<CustomerDTO> cusList = dao.viewCustomer();
                                             if (cusList != null) {
                                         %>
                                         <table class="table table-striped table-bordered zero-configuration">
@@ -153,18 +152,18 @@
                                                 <%
                                                     for (CustomerDTO cus : cusList) {
                                                 %>
-                                            <form action="">
+                                            <form action="CustomerController">
                                                 <tr>
-                                                    <td><%= cus.getFullname() %></td>
+                                                    <td><%= cus.getFullName()%></td>
                                                     <td><%= cus.getCustomerID()%></td>
                                                     <td><%= cus.getAddress()%></td>
                                                     <td><%= cus.getPhoneNumber()%></td>
                                                     <td>
                                                         <input type="hidden" name="customerID" value="<%= cus.getCustomerID()%>"/>
-                                                        <input type="hidden" name="fullname" value="<%=  cus.getFullname() %>"/>
+                                                        <input type="hidden" name="fullname" value="<%= cus.getFullName()%>"/>
                                                         <input type="hidden" name="address" value="<%= cus.getAddress()%>"/>
                                                         <input type="hidden" name="phoneNumber" value="<%= cus.getPhoneNumber()%>"/>
-                                                        <input type="submit" name="action" value="Cập nhật"/>
+                                                        <input type="submit" name="action" value="Cập nhật" style="border-radius: 10px;padding: 5px;background-color: #f7f70c"/>
                                                     </td>
                                                 </tr>
                                             </form>
@@ -226,4 +225,5 @@
         <script src="./plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
 
     </body>
+
 </html>

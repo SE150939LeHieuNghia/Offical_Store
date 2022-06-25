@@ -137,6 +137,7 @@
                                             ArrayList<BillDTO> list = (ArrayList<BillDTO>) request.getAttribute("newbill");
                                             Date date = (Date) request.getAttribute("date");
                                             int money = (int) request.getAttribute("money");
+                                            int itemId = (int) session.getAttribute("itemID");
                                             BillDAO bdao = new BillDAO();
                                             ItemDAO idao = new ItemDAO();
 
@@ -189,7 +190,7 @@
 
                                         <%            }
                                         %>
-                                        <button style="background-color: #00FF00;padding: 10px 20px;"><a style="text-decoration: none; color: black;" href="CreateNewBill?action=add&interestDay=<%= interestDay %>">Thêm</a></button>
+                                        <button style="background-color: #00FF00;padding: 10px 20px;"><a style="text-decoration: none; color: black;" href="CreateBill?action=add&interestDay=<%= interestDay %>&itemID=<%= itemId %>">Thêm</a></button>
                                     </div>
                                 </div>
                             </div>

@@ -36,6 +36,22 @@
         <servlet-name>CreateBill</servlet-name>
         <servlet-class>servlet.CreateBill</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CreateCustomer</servlet-name>
+        <servlet-class>servlet.CreateCustomer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateItem</servlet-name>
+        <servlet-class>CreateItem</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ItemListController</servlet-name>
+        <servlet-class>servlet.ItemListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateItemController</servlet-name>
+        <servlet-class>servlet.UpdateItemController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -71,6 +87,22 @@
     <servlet-mapping>
         <servlet-name>CreateBill</servlet-name>
         <url-pattern>/CreateBill</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateCustomer</servlet-name>
+        <url-pattern>/CreateCustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateItem</servlet-name>
+        <url-pattern>/CreateItem</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ItemListController</servlet-name>
+        <url-pattern>/ItemListController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateItemController</servlet-name>
+        <url-pattern>/UpdateItemController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
